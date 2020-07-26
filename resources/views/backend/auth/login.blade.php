@@ -1,60 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login | Laravel Stisla</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('backend/css/components.css')}}">
-</head>
-<body>
-    <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                        <div class="login-brand">
-                            <img src="{{asset('backend/img/login-logo.png')}}" alt="logo" width="100" class="shadow-light rounded-circle">
-                        </div>
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>Login</h4>
-                            </div>
-                            <div class="card-body">
-                                {!! Form::open()->method('post')->route('admin.login') !!}                                
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        {!! Form::text('email', 'Email')->required()->type('email')->attrs(['autofocus']) !!}
-                                    </div>
-                                    <div class="col-lg-12">
-                                        {!! Form::text('password', 'Password')->type('password')->required() !!}
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                                Login
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                {!! Form::close() !!}
-                            </div>
+@extends('backend.layouts.auth')
+@section('title','Log In')
+@section('content')
+<div class="login-box">
+    <div class="login-logo">
+        <img src="{{asset('backend/img/logo.png')}}" width="50%" alt="">
+        <br>
+        <a href="#"><b>Your</b> Company</a>
+    </div>
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Log in untuk masuk</p>
+            <form action="{{route('login')}}" method="post">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                    </div>
+                </div>
+            </form>
+            {{-- <p class="mb-1">
+                <a href="forgot-password.html">I forgot my password</a>
+            </p> --}}
+        </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="{{asset('backend/js/stisla.js')}}"></script>
-    <script src="{{asset('backend/js/scripts.js')}}"></script>
-    <script src="{{asset('backend/js/custom.js')}}"></script>
-</body>
-</html>
+</div>    
+@endsection

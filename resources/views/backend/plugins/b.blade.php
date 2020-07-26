@@ -1,3 +1,0 @@
-@push('styles')
-    b
-@endpush

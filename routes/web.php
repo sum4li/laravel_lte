@@ -13,20 +13,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){
+    return 'frontend goto admin: <a href="'.route('login').'">Admin</a>';
 
-Route::get('/', function () {
-    // return view('backend.dashboard.index');
-    return redirect()->route('admin.show_login');
-});
+})->name('index');
 
+Auth::routes([
+    'register'=>false,
+    'verify'=>false,
+    'reset'=>false
+]);
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('admin/dashboard', function () {
-        return view('backend.dashboard.index');
-    })->name('admin.dashboard');
-
-    Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
+    Route::name('admin.')->group(function(){ /* admin prefix name */        
+        Route::prefix('admin')->group(function(){ /* admin prefix url */
+            /* DASHBOARD */
+            Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+            
+        });
+    });
 });
-
-Route::get('admin', 'Auth\LoginController@showLoginForm')->name('admin.show_login');
-Route::post('login', 'Auth\LoginController@login')->name('admin.login');
